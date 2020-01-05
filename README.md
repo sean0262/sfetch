@@ -40,4 +40,4 @@ save the file by doing the following:
   
 Then simply run it `sfetch`  
   
-<i>If you are using something besides bash, change the first line to: `#!/bin/YOUR-SHELL-HERE`</i>
+<i>If you are using a shell besides bash, change the first line to: `#!/bin/YOUR-SHELL-HERE`</i>
