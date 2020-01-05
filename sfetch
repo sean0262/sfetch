@@ -5,7 +5,8 @@ kernel=$(uname -r)
 shell=$(echo `$SHELL --version` | cut -d'(' -f1)
 uptime=$(uptime -p)
 packages=$(dpkg-query -W | wc -l)
-de=$(echo "$XDG_DATA_DIRS" | sed 's/.*\(xfce\|kde\|gnome\).*/\1/')
+de=$(echo "$XDG_CURRENT_DESKTOP")
+session=$(echo "$GDMSESSION")
 memory=$(free -hm | awk 'NR==2{printf "%s/%s\n", $3,$2}')
 
 echo "OS: $distro"
@@ -14,4 +15,5 @@ echo "Shell: $shell"
 echo "Uptime: $uptime"
 echo "Packages: $packages"
 echo "DE: $de"
+echo "Session: $session"
 echo "Memory: $memory"
