@@ -30,7 +30,8 @@ copy the following:
 >echo "Packages: $packages"  
 >echo "DE: $de"  
 >echo "Session: $session"  
->echo "Memory: $memory"`  
+>echo "Memory: $memory"
+  
 `paste it into the sfetch file, ctrl+shift+v`  
 save the file by doing the following:   
 `ctrl+x then when asked to save modified buffer press y and then press enter.`  
