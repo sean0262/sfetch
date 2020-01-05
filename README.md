@@ -12,7 +12,7 @@ Method 2.
 `cd /usr/bin/`  
 `sudo nano sfetch`  
 copy the following:  
-`>#!/bin/bash  
+>#!/bin/bash  
 >  
 >distro=$(cat /etc/os-release | head -1 | sed 's/"//g' | cut -d= -f2)  
 >kernel=$(uname -r)  
