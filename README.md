@@ -5,9 +5,10 @@ light-weight system information script written in less than 20 lines.
 
 
 
-Method 1.  
-`cd /usr/bin/`  
-`sudo git clone https://github.com/sean0262/sfetch.git`  
+Method 1.    
+`git clone https://github.com/sean0262/sfetch.git`  
+`chmod 755 sfetch/sfetch`  
+`sudo cp sfetch/sfetch /usr/bin/`  
 Method 2.  
 `cd /usr/bin/`  
 `sudo nano sfetch`  
@@ -37,5 +38,6 @@ save the file by doing the following:
 `ctrl+x then when asked to save modified buffer press y and then press enter.`  
 `sudo chmod 755 sfetch`  
   
-
+Then simply run it `sfetch`  
+  
 <i>If you are using something besides bash, change the first line to: `#!/bin/YOUR-SHELL-HERE`</i>
