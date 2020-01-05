@@ -1,2 +1,5 @@
-# scripts
-A collection of Linux Scripts made by Sean0262
+# A collection of Linux Scripts
+
+You're free to use and change anything you wish.
+
+They are made for bash, but you can change it to sh or whatever you want inside of the scripts.
