@@ -5,13 +5,13 @@ light-weight system information script written in less than 20 lines.
 
 
 
-Method 1.
-`cd /usr/bin/`
-`sudo git clone https://github.com/sean0262/sfetch.git`
-Method 2.
-`cd /usr/bin/`
-`sudo nano sfetch`
-copy the following: 
+Method 1.\n
+`cd /usr/bin/`\n
+`sudo git clone https://github.com/sean0262/sfetch.git`\n
+Method 2.\n
+`cd /usr/bin/`\n
+`sudo nano sfetch`\n
+copy the following: \n
 `>#!/bin/bash
 >
 >distro=$(cat /etc/os-release | head -1 | sed 's/"//g' | cut -d= -f2)
