@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 distro=$(cat /etc/os-release | head -1 | sed 's/"//g' | cut -d= -f2)
 kernel=$(uname -r)
