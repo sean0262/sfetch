@@ -1,5 +1,5 @@
 # sfetch
-light-weight system information script written in less than 20 lines. 
+light-weight system information script written in less than 50 lines. 
 
 ![sfetch](https://i.imgur.com/tjlk8kh.png)
   
