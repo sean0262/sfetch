@@ -5,10 +5,23 @@ host=$(cat /sys/devices/virtual/dmi/id/product_name /sys/devices/virtual/dmi/id/
 kernel=$(uname -r)
 shell=$(echo `$SHELL --version` | cut -d'(' -f1)
 uptime=$(uptime -p)
-packages=$(dpkg-query -W | wc -l)
-de=$(echo "$XDG_CURRENT_DESKTOP")
 session=$(echo "$GDMSESSION")
 memory=$(free -hm | awk 'NR==2{printf "%s/%s\n", $3,$2}')
+
+if [[ $distro == *"Debian"* ]]
+then
+  packages=$(dpkg-query -W | wc -l)
+elif [[ $distro == *"Slackware"* ]]
+then
+  packages=$(ls /var/log/packages | wc -l)
+fi
+
+if [ -f "$XDG_CURRENT_DESKTOP" ]
+then
+  de=$(echo "$XDG_CURRENT_DESKTOP")
+else
+  de=$(echo "None")
+fi
 
 echo "OS: $distro"
 echo "Host: $host"
