@@ -11,9 +11,9 @@ light-weight system information script written in less than 50 lines.
 <br/>
 <b>Supported & Tested on:  </b>  <br/>
 Distros:
-- Debian
+Debian
 - Ubuntu  
 - Slackware  
 
 DEs:
--XFCE
+XFCE - Gnome
