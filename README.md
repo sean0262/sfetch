@@ -5,7 +5,7 @@ light-weight system information script written in less than 50 lines.
   
 [[Install Guide](https://github.com/sean0262/sfetch/wiki/Install)]
   
-  
+<br/>  
   
   
 Distros tested & supported so far:  
