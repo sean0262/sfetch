@@ -8,7 +8,7 @@ light-weight system information script written in less than 50 lines.
 <br/>  
 <b><i>The current sfetch version is an early one, so a lot of DEs & Distros are still not supported!</b></i> 
 <br/>  
-  
+<br/>
 <b>Supported & Tested on:  </b>  <br/>
 Distros:
 - Debian
