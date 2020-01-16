@@ -29,10 +29,12 @@ if [ "$1" == "--help" ]; then
 	echo "--help		Display Arguments"
 fi
 
+if [ "$1" == "--
+
 if [[ $# -eq 0 ]] ; then
 	host=$(cat /sys/devices/virtual/dmi/id/product_name /sys/devices/virtual/dmi/id/product_version | tr '\n' ' ')
 	
-	if [[ $distro =~ "Debian" || "Ubuntu" ]]  
+	if [[ $distro =~ "Debian" || "Ubuntu" || "Raspbian" ]]  
 	then
   		packages=$(dpkg-query -W | wc -l)
 	fi
