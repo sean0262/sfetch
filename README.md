@@ -14,6 +14,7 @@ Distros:
 Debian
 - Ubuntu  
 - Slackware  
+- Raspbian  
 
 DEs:
 XFCE - Gnome
