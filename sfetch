@@ -1,6 +1,7 @@
 #!/bin/bash
 distro=$(cat /etc/os-release | head -1 | sed 's/"//g' | cut -d= -f2)
-host=$(cat /sys/devices/virtual/dmi/id/product_name /sys/devices/virtual/dmi/id/pr$
+host=$(cat /sys/devices/virtual/dmi/id/product_name /sys/devices/virtual/dmi/id/product_version | tr '\n' ' ')
+
 kernel=$(uname -r)
 shell=$(echo `$SHELL --version` | cut -d'(' -f1)
 uptime=$(uptime -p)
