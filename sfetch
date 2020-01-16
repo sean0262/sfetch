@@ -29,7 +29,9 @@ if [ "$1" == "--help" ]; then
 	echo "--help		Display Arguments"
 fi
 
-if [ "$1" == "--
+if [ "$1" == "--version" ]; then
+	echo "sfetch version 0.0.5a"
+fi
 
 if [[ $# -eq 0 ]] ; then
 	host=$(cat /sys/devices/virtual/dmi/id/product_name /sys/devices/virtual/dmi/id/product_version | tr '\n' ' ')
