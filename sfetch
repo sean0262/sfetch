@@ -1,11 +1,9 @@
 #!/bin/bash
 distro=$(cat /etc/os-release | head -1 | sed 's/"//g' | cut -d= -f2)
-host=$(cat /sys/devices/virtual/dmi/id/product_name /sys/devices/virtual/dmi/id/product_version | tr '\n' ' ')
-
 kernel=$(uname -r)
 shell=$(echo `$SHELL --version` | cut -d'(' -f1)
 uptime=$(uptime -p)
-memory=$(free -hm | awk 'NR==2{printf "%s/%s\n", $3,$2}')
+memory=$(free -hm | awk 'NR==2{printf "%s/%s\n", $3,$2}')l
 
 declare -A osInf;
 osInf[/etc/redhat-release]=yum
@@ -17,41 +15,52 @@ osInf[/etc/ubuntu-release]=apt-get
 osInf[/etc/debian_version]=apt-get
 
 if [ "$1" == "--PM" ]; then
-        for f in ${!osInf[@]}
-        do
-                if [[ -f $f ]];then
-                        echo "$(${osInf[$f]})"
-                fi
-        done
+	for f in ${!osInf[@]}
+	do
+		if [[ -f $f ]];then
+			echo "$(${osInf[$f]})"
+		fi
+	done
 fi
 
 if [[ $# -eq 0 ]] ; then
-        if [[ $distro == *"Debian"* || *"Ubuntu"* ]]; then
-                packages=$(dpkg-query -W | wc -l)
-        fi
+	host=$(cat /sys/devices/virtual/dmi/id/product_name /sys/devices/virtual/dmi/id/product_version | tr '\n' ' ')
+	
+	if [[ $distro =~ "Debian" || "Ubuntu" ]]  
+	then
+  		packages=$(dpkg-query -W | wc -l)
+	fi
 
-        if [[ $distro == *"Slackware"* ]]; then
-                packages=$(ls /var/log/packages | wc -l)
-        fi
+	if [[ $distro =~ "Raspbian" ]]
+	then
+		host=$(cat /sys/firmware/devicetree/base/model | echo "\n")
+	fi
 
-        if [ -n "$XDG_CURRENT_DESKTOP" ]; then
-                de=$(echo "$XDG_CURRENT_DESKTOP")
-        else
-                de=$(echo "None")
-        fi
+	if [[ $distro =~ "Slackware" ]] 
+	then
+  		packages=$(ls /var/log/packages | wc -l)
+	fi
 
-        if [ -n "$GDMSESSION" ]; then
-                session=$(echo "$GDMSESSION")
-        else
-                session=$(echo "None")
-        fi
-        echo "OS: $distro"
-        echo "DE: $de"
-        echo "Host: $host"
-        echo "Kernel: $kernel"
-        echo "Shell: $shell"
-        echo "Uptime: $uptime"
-        # echo "Packages: $packages"
-        # echo "Session: $session"
-        echo "Memory: $memory"
+	if [ -n "$XDG_CURRENT_DESKTOP" ]; then
+		de=$(echo "$XDG_CURRENT_DESKTOP")
+	else
+  		de=$(echo "None")
+	fi
+
+	if [ -n "$GDMSESSION" ]; then
+  		session=$(echo "$GDMSESSION")
+	else
+  		session=$(echo "None")
+	fi
+
+
+	echo "OS: $distro"
+	echo "DE: $de"
+	echo "Host: $host"
+	echo "Kernel: $kernel"
+	echo "Shell: $shell"
+	echo "Uptime: $uptime"
+	# echo "Packages: $packages"
+	# echo "Session: $session"
+	echo "Memory: $memory"
 fi
