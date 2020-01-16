@@ -23,6 +23,12 @@ if [ "$1" == "--PM" ]; then
 	done
 fi
 
+if [ "$1" == "--help" ]; then
+	echo "Available Arguments:"
+	echo "--PM		Displays Package Manager"
+	echo "--help		Display Arguments"
+fi
+
 if [[ $# -eq 0 ]] ; then
 	host=$(cat /sys/devices/virtual/dmi/id/product_name /sys/devices/virtual/dmi/id/product_version | tr '\n' ' ')
 	
