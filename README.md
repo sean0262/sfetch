@@ -15,6 +15,7 @@ Debian
 - Ubuntu  
 - Slackware  
 - Raspbian  
+- FreeBSD  
 
 DEs:
 XFCE - Gnome
