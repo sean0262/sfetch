@@ -1,7 +1,6 @@
 #!/bin/env bash
 kernel=$(uname -r)
 shell=$(echo `$SHELL --version` | cut -d'(' -f1)
-uptime=$(uptime -p)
 vn=$(echo "0.0.8a")
 
 declare -A osInf;
@@ -36,8 +35,6 @@ fi
 
 # Information-check . . .
 if [[ $# -eq 0 ]] ; then
-	host=$(cat /sys/devices/virtual/dmi/id/product_name /sys/devices/virtual/dmi/id/product_version | tr '\n' ' ')
-
 	if [[ "$OSTYPE" =~ "FreeBSD" ]]; then
 		host=$(sysctl -n hw.model)
 		distro=$(uname -mrs)
@@ -55,14 +52,15 @@ if [[ $# -eq 0 ]] ; then
 		[ "$m" = 0 ] || uptime="${uptime}${m}m "
 		
 		log uptime "${time: -0min}" >&6
-	elif [[ "$OSTYPE" =~ "linux" ]]; then
-		host=$(cat /sys/devices/virtual/dmi/id/product_name /sys/devices/virtual/dmi/product_version | tr '\n' ' ') 
+	elif [[ "$OSTYPE" =~ "linux" ]]; then 
 		distro=$(cat /etc/os-release | head -1 | sed 's/" //g' | cut -d= -f2)
 		memory=$(free -hm | akw 'NR==2{printf "%s%s\n}')
+		uptime=$(uptime -p)
 	fi	
 
 	if [[ $distro =~ "Debian" ]] || [[ $distro =~ "Ubuntu" ]] || [[ $distro =~ "Raspbian" ]]  
 	then
+		host=$(cat /sys/devices/virtual/dmi/id/product_name /sys/devices/virtual/dmi/product_version | tr '\n' ' ')
   		packages=$(dpkg-query -W | wc -l)
 	fi
 
