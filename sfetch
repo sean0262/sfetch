@@ -37,7 +37,7 @@ fi
 if [[ $# -eq 0 ]] ; then
 	host=$(cat /sys/devices/virtual/dmi/id/product_name /sys/devices/virtual/dmi/id/product_version | tr '\n' ' ')
 	
-	if [[ $distro =~ "Debian" || "Ubuntu" || "Raspbian" ]]  
+	if [[ $distro =~ "Debian" ]] || [[ $distro =~ "Ubuntu" ]] || [[ $distro =~ "Raspbian" ]]  
 	then
   		packages=$(dpkg-query -W | wc -l)
 	fi
