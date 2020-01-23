@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/env bash
 distro=$(cat /etc/os-release | head -1 | sed 's/"//g' | cut -d= -f2)
 kernel=$(uname -r)
 shell=$(echo `$SHELL --version` | cut -d'(' -f1)
@@ -14,9 +14,12 @@ osInf[/etc/SuSE-release]=zypp
 osInf[/etc/debian_release]=apt-get
 osInf[/etc/ubuntu-release]=apt-get
 osInf[/etc/debian_version]=apt-get
+# Change to 'slackpkg' to '/usr/sbin/slackpkg' if not working!
+osInf[/etc/slackware-version]=slackpkg
+
 
 # Arguments . . .
-if [ "$1" == "--PM" ] || [ "$1" == "--Package-Manager" ]; then
+if [ "$1" == "--PM" ] || [ "$1" == "--pm" ] || [ "$1" == "--Package-Manager" ]; then
 	for f in ${!osInf[@]}
 	do
 		if [[ -f $f ]];then
