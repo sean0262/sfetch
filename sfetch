@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/bin/sh
 kernel=$(uname -r)
 shell=$(echo `$SHELL --version` | cut -d'(' -f1)
 vn=$(echo "0.0.8a")
@@ -58,7 +58,7 @@ if [[ $# -eq 0 ]] ; then
 		uptime=$(uptime -p)
 	fi	
 
-	if [[ $distro =~ "Debian" ]] || [[ $distro =~ "Ubuntu" ]] || [[ $distro =~ "Raspbian" ]]  
+	if [[ $distro =~ "Debian" ]] || [[ $distro =~ "Ubuntu" ]]
 	then
 		host=$(cat /sys/devices/virtual/dmi/id/product_name /sys/devices/virtual/dmi/id/product_version | tr '\n' ' ')
   		packages=$(dpkg-query -W | wc -l)
@@ -66,7 +66,8 @@ if [[ $# -eq 0 ]] ; then
 
 	if [[ $distro =~ "Raspbian" ]]
 	then
-		host=$(cat /sys/firmware/devicetree/base/model | echo "\n")
+		host=$(cat /sys/firmware/devicetree/base/model)
+		packages=$(dpkg-query -W | wc -l)
 	fi
 
 	if [[ $distro =~ "Slackware" ]] 
