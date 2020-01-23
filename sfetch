@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 kernel=$(uname -r)
 shell=$(echo `$SHELL --version` | cut -d'(' -f1)
 vn=$(echo "0.0.8a")
