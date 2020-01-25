@@ -98,14 +98,19 @@ if [[ $# -eq 0 ]] ; then
   		session=$(echo "None")
 	fi
 
+	# Colors for Echo... [rc = red color, nc = no color, etc...]
+	rc='\033[0;31m'
+	gc='\033[0;32m'
+	nc='\033[0m'
 
-	echo "OS: $distro"
-	echo "DE: $de"
-	echo "Host: $host"
-	echo "Kernel: $kernel"
-	echo "Shell: $shell"
-	echo "Uptime: $uptime"
-	# echo "Packages: $packages"
-	# echo "Session: $session"
-	echo "Memory: $memory"
+	# Display the information...
+	echo -e "${rc}OS${nc}: $distro"
+	echo -e "${rc}DE${nc}: $de"
+	echo -e "${rc}Host${nc}: $host"
+	echo -e "${rc}Kernel${nc}: $kernel"
+	echo -e "${rc}Shell${nc}: $shell"
+	echo -e "${rc}Uptime${nc}: $uptime"
+	# echo -e "${rc}Packages${nc}: $packages"
+	# echo -e "${rc}Session${nc}: $session"
+	echo -e "${rc}Memory${nc}: $memory"
 fi
