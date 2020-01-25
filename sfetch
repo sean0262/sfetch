@@ -1,7 +1,7 @@
 #!/bin/bash
 kernel=$(uname -r)
 shell=$(echo `$SHELL --version` | cut -d'(' -f1)
-vn=$(echo "0.0.8a")
+vn=$(echo "0.1.0a")
 
 declare -A osInf;
 osInf[/etc/redhat-release]=yum
