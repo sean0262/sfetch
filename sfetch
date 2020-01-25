@@ -55,7 +55,17 @@ if [[ $# -eq 0 ]] ; then
 		[ "$m" = 0 ] || uptime="${uptime}${m}m "
 		
 		log uptime "${time: -0min}" >&6
-	elif [[ "$OSTYPE" =~ "linux" ]]; then 
+	elif [[ "$OSTYPE" =~ "linux" ]]; then
+		if [[ -d "/system/app/" && -d "/system/priv-app" ]]; then
+                	host="$(getprop ro.product.brand) $(getprop ro.product.model)"
+            	elif [[ -f "/sys/devices/virtual/dmi/id/product_name" || -f "/sys/devices/virtual/dmi/id/product_version" ]]; then
+                	host="$(< /sys/devices/virtual/dmi/id/product_name)"
+                	host+=" $(< /sys/devices/virtual/dmi/id/product_version)"
+		elif [[ -f "/sys/firmware/devicetree/base/model" ]]; then
+                	host="$(< /sys/firmware/devicetree/base/model)"
+            	elif [[ -f "/tmp/sysinfo/model" ]]; then
+                	host="$(< /tmp/sysinfo/model)"
+            	fi
 		distro=$(cat /etc/os-release | head -1 | sed 's/"//g' | cut -d= -f2)
 		memory=$(free -hm | awk 'NR==2{printf "%s/%s\n", $3, $2}')
 		uptime=$(uptime -p)
@@ -63,13 +73,11 @@ if [[ $# -eq 0 ]] ; then
 
 	if [[ $distro =~ "Debian" ]] || [[ $distro =~ "Ubuntu" ]]
 	then
-		host=$(cat /sys/devices/virtual/dmi/id/product_name /sys/devices/virtual/dmi/id/product_version | tr '\n' ' ')
   		packages=$(dpkg-query -W | wc -l)
 	fi
 
 	if [[ $distro =~ "Raspbian" ]]
 	then
-		host=$(cat /sys/firmware/devicetree/base/model)
 		packages=$(dpkg-query -W | wc -l)
 	fi
 
