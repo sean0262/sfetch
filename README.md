@@ -1,5 +1,5 @@
 # sfetch
-light-weight system information script written in less than 100 lines. 
+light-weight system information script written in less than 100 lines of code. 
 
 ![sfetch](https://i.imgur.com/I92HyDx.png)
 <br/> 
@@ -11,10 +11,9 @@ light-weight system information script written in less than 100 lines.
 <br/>
 <b>Supported & Tested on:  </b>  <br/>
 Distros:
-Debian
-- Ubuntu  
-- Slackware  
-- Raspbian  
+Debian/Ubuntu/Raspbian
+- Slackware   
+- Arch/Manjaro  
 - FreeBSD  
 
 DEs:
