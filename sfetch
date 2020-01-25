@@ -16,22 +16,25 @@ osInf[/etc/slackware-version]=slackpkg
 
 
 # Arguments . . .
-if [ "$1" == "--PM" ] || [ "$1" == "--pm" ] || [ "$1" == "--Package-Manager" ]; then
-	for f in ${!osInf[@]}
-	do
-		if [[ -f $f ]];then
-			echo "$(${osInf[$f]})"
-		fi
-	done
-elif [ "$1" == "--help" ] || [ "$1" == "-h" ]; then
-	echo "Available Arguments:"
-	echo "Package Manager [--PM]	Displays Package Manager"
-	echo "Help [-h][--help]	Displays Available Arguments"
-	echo "Version [--version]	Displays Current sfetch Version"
-elif [ "$1" == "--version" ]; then
-	echo "version $vn"
+if [[ -n "$1" ]]; then
+	if [ "$1" == "--package-manager" ] || [ "$1" == "-pm" ]; then
+		for f in ${!osInf[@]}
+		do
+			if [[ -f $f ]];then
+				echo "$(${osInf[$f]})"
+			fi
+		done
+	elif [ "$1" == "--help" ] || [ "$1" == "-h" ]; then
+		echo "Available Arguments:"
+		echo "Package Manager [--PM]	Displays Package Manager"
+		echo "Help [-h][--help]	Displays Available Arguments"
+		echo "Version [--version]	Displays Current sfetch Version"
+	elif [ "$1" == "--version" ] || [ "$1" == "-v" ]; then
+		echo "version $vn"
+	else
+		echo "Try using -h or --help for a list of Available Arguments."
+	fi
 fi
-
 
 # Information-check . . .
 if [[ $# -eq 0 ]] ; then
