@@ -54,7 +54,7 @@ if [[ $# -eq 0 ]] ; then
 		[ "$h" = 0 ] || uptime="${uptime}${h}h "
 		[ "$m" = 0 ] || uptime="${uptime}${m}m "
 		
-		log uptime "${time: -0min}" >&6
+		log uptime "${time: -0min}" > /dev/null 2>&1
 	elif [[ "$OSTYPE" =~ "linux" ]]; then
 		if [[ -d "/system/app/" && -d "/system/priv-app" ]]; then
                 	host="$(getprop ro.product.brand) $(getprop ro.product.model)"
