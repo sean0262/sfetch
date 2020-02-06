@@ -108,8 +108,9 @@ if [[ $# -eq 0 ]] ; then
 			wm=${wm/\"}
 			wm=${wm/\"*}
 		}
+	else
+		wm=$(echo "None")
 	fi
-
 
 	# Colors for Echo... [rc = red color, nc = no color, etc...]
 	rc='\033[0;31m'
