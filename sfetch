@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/env bash
 kernel=$(uname -r)
 shell=$(echo `$SHELL --version` | cut -d'(' -f1)
 vn=$(echo "0.1.0a")
@@ -98,6 +98,19 @@ if [[ $# -eq 0 ]] ; then
   		session=$(echo "None")
 	fi
 
+	# Find WM...
+	if [[ $DISPLAY ]]; then
+		type -p xprop &>/dev/null && {
+			id=$(xprop -root -notype _NET_SUPPORTING_WM_CHECK)
+			id=${id##* }
+			wm=$(xprop -id "$id" -notype -len 100 -f _NET_WM_NAME 8t)
+			wm=${wm/*WM_NAME = }
+			wm=${wm/\"}
+			wm=${wm/\"*}
+		}
+	fi
+
+
 	# Colors for Echo... [rc = red color, nc = no color, etc...]
 	rc='\033[0;31m'
 	gc='\033[0;32m'
@@ -106,6 +119,7 @@ if [[ $# -eq 0 ]] ; then
 	# Display the information...
 	echo -e "${rc}OS${nc}: $distro"
 	echo -e "${rc}DE${nc}: $de"
+	echo -e "${rc}WM${nc}: $wm"
 	echo -e "${rc}Host${nc}: $host"
 	echo -e "${rc}Kernel${nc}: $kernel"
 	echo -e "${rc}Shell${nc}: $shell"
