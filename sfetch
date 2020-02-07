@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 kernel=$(uname -r)
 shell=$(echo `$SHELL --version` | cut -d'(' -f1)
-vn=$(echo "0.1.0a")
+vn=$(echo "0.1.1a")
 
 declare -A osInf;
 osInf[/etc/redhat-release]=yum
@@ -26,7 +26,7 @@ if [[ -n "$1" ]]; then
 		done
 	elif [ "$1" == "--help" ] || [ "$1" == "-h" ]; then
 		echo "Available Arguments:"
-		echo "Package Manager [--PM]	Displays Package Manager"
+		echo "Package Manager [-pm]	Displays Package Manager"
 		echo "Help [-h][--help]	Displays Available Arguments"
 		echo "Version [--version]	Displays Current sfetch Version"
 	elif [ "$1" == "--version" ] || [ "$1" == "-v" ]; then
