@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/usr/bin/env bash
 kernel=$(uname -r)
 shell=$(echo `$SHELL --version` | cut -d'(' -f1)
 vn=$(echo "0.1.0a")
@@ -13,7 +13,7 @@ osInf[/etc/ubuntu-release]=apt-get
 osInf[/etc/debian_version]=apt-get
 # Change to 'slackpkg' to '/usr/sbin/slackpkg' if not working!
 osInf[/etc/slackware-version]=slackpkg
-
+osInf[/bin/freebsd-version]=pkg
 
 # Arguments . . .
 if [[ -n "$1" ]]; then
