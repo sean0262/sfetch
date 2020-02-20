@@ -57,15 +57,15 @@ if [[ $# -eq 0 ]] ; then
 		log uptime "${time: -0min}" > /dev/null 2>&1
 	elif [[ "$OSTYPE" =~ "linux" ]]; then
 		if [[ -d "/system/app/" && -d "/system/priv-app" ]]; then
-                	host="$(getprop ro.product.brand) $(getprop ro.product.model)"
-            	elif [[ -f "/sys/devices/virtual/dmi/id/product_name" || -f "/sys/devices/virtual/dmi/id/product_version" ]]; then
-                	host="$(< /sys/devices/virtual/dmi/id/product_name)"
-                	host+=" $(< /sys/devices/virtual/dmi/id/product_version)"
+			host="$(getprop ro.product.brand) $(getprop ro.product.model)"
+		elif [[ -f "/sys/devices/virtual/dmi/id/product_name" || -f "/sys/devices/virtual/dmi/id/product_version" ]]; then
+			host="$(< /sys/devices/virtual/dmi/id/product_name)"
+			host+=" $(< /sys/devices/virtual/dmi/id/product_version)"
 		elif [[ -f "/sys/firmware/devicetree/base/model" ]]; then
-                	host="$(< /sys/firmware/devicetree/base/model)"
-            	elif [[ -f "/tmp/sysinfo/model" ]]; then
-                	host="$(< /tmp/sysinfo/model)"
-            	fi
+			host="$(< /sys/firmware/devicetree/base/model)"
+		elif [[ -f "/tmp/sysinfo/model" ]]; then
+			host="$(< /tmp/sysinfo/model)"
+		fi
 		distro=$(cat /etc/os-release | head -1 | sed 's/"//g' | cut -d= -f2)
 		memory=$(free -hm | awk 'NR==2{printf "%s/%s\n", $3, $2}')
 		uptime=$(uptime -p)
