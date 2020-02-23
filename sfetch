@@ -71,14 +71,9 @@ if [[ $# -eq 0 ]] ; then
 		uptime=$(uptime -p)
 	fi	
 
-	if [[ $distro =~ "Debian" ]] || [[ $distro =~ "Ubuntu" ]]
+	if [[ $distro =~ "Debian" ]] || [[ $distro =~ "Ubuntu" ]] || [[ $distro =~ "Raspbian" ]]
 	then
   		packages=$(dpkg-query -W | wc -l)
-	fi
-
-	if [[ $distro =~ "Raspbian" ]]
-	then
-		packages=$(dpkg-query -W | wc -l)
 	fi
 
 	if [[ $distro =~ "Slackware" ]] 
