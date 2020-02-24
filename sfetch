@@ -15,29 +15,13 @@ osInf[/etc/debian_version]=apt-get
 osInf[/etc/slackware-version]=slackpkg
 osInf[/bin/freebsd-version]=pkg
 
-# Arguments . . .
-if [[ -n "$1" ]]; then
-	if [ "$1" == "--package-manager" ] || [ "$1" == "-pm" ]; then
-		for f in ${!osInf[@]}
-		do
-			if [[ -f $f ]];then
-				echo "$(${osInf[$f]})"
-			fi
-		done
-	elif [ "$1" == "--help" ] || [ "$1" == "-h" ]; then
-		echo "Available Arguments:"
-		echo "Package Manager [-pm]	Displays Package Manager"
-		echo "Help [-h][--help]	Displays Available Arguments"
-		echo "Version [--version]	Displays Current sfetch Version"
-	elif [ "$1" == "--version" ] || [ "$1" == "-v" ]; then
-		echo "version $vn"
-	else
-		echo "Try using -h or --help for a list of Available Arguments."
-	fi
-fi
+# Colors for Echo... [rc = red color, nc = no color, etc...]
+rc='\033[0;31m'
+gc='\033[0;32m'
+nc='\033[0m'
 
-# Information-check . . .
-if [[ $# -eq 0 ]] ; then
+function run {
+	# System information fetch...
 	if [[ "$OSTYPE" =~ "FreeBSD" ]]; then
 		host=$(sysctl -n hw.model)
 		distro=$(uname -mrs)
@@ -53,7 +37,6 @@ if [[ $# -eq 0 ]] ; then
 		[ "$d" = 0 ] || uptime="${uptime}${d}d "
 		[ "$h" = 0 ] || uptime="${uptime}${h}h "
 		[ "$m" = 0 ] || uptime="${uptime}${m}m "
-		
 		log uptime "${time: -0min}" > /dev/null 2>&1
 	elif [[ "$OSTYPE" =~ "linux" ]]; then
 		if [[ -d "/system/app/" && -d "/system/priv-app" ]]; then
@@ -69,24 +52,28 @@ if [[ $# -eq 0 ]] ; then
 		distro=$(cat /etc/os-release | head -1 | sed 's/"//g' | cut -d= -f2)
 		memory=$(free -hm | awk 'NR==2{printf "%s/%s\n", $3, $2}')
 		uptime=$(uptime -p)
-	fi	
-
+	fi
 	if [[ $distro =~ "Debian" ]] || [[ $distro =~ "Ubuntu" ]] || [[ $distro =~ "Raspbian" ]]
 	then
   		packages=$(dpkg-query -W | wc -l)
 	fi
 
-	if [[ $distro =~ "Slackware" ]] 
+	if [[ $distro =~ "Slackware" ]]
 	then
   		packages=$(ls /var/log/packages | wc -l)
 	fi
 
+	if [[ $distro =~ "Arch"  ]] || [[ $distro =~ "Manjaro" ]]
+	then
+		packages=$(pacman)
+	fi
+
+	# Find Greeter...
 	if [ -n "$XDG_CURRENT_DESKTOP" ]; then
 		de=$(echo "$XDG_CURRENT_DESKTOP")
 	else
   		de=$(echo "None")
 	fi
-
 	if [ -n "$GDMSESSION" ]; then
   		session=$(echo "$GDMSESSION")
 	else
@@ -107,20 +94,45 @@ if [[ $# -eq 0 ]] ; then
 		wm=$(echo "None")
 	fi
 
-	# Colors for Echo... [rc = red color, nc = no color, etc...]
-	rc='\033[0;31m'
-	gc='\033[0;32m'
-	nc='\033[0m'
-
 	# Display the information...
-	echo -e "${rc}OS${nc}: $distro"
-	echo -e "${rc}DE${nc}: $de"
-	echo -e "${rc}WM${nc}: $wm"
-	echo -e "${rc}Host${nc}: $host"
-	echo -e "${rc}Kernel${nc}: $kernel"
-	echo -e "${rc}Shell${nc}: $shell"
-	echo -e "${rc}Uptime${nc}: $uptime"
-	# echo -e "${rc}Packages${nc}: $packages"
-	# echo -e "${rc}Session${nc}: $session"
-	echo -e "${rc}Memory${nc}: $memory"
+	echo -e "${gc}OS${nc}: $distro"
+	echo -e "${gc}DE${nc}: $de"
+	echo -e "${gc}WM${nc}: $wm"
+	echo -e "${gc}Host${nc}: $host"
+	echo -e "${gc}Kernel${nc}: $kernel"
+	echo -e "${gc}Shell${nc}: $shell"
+	echo -e "${gc}Uptime${nc}: $uptime"
+	# echo -e "${gc}Packages${nc}: $packages"
+	# echo -e "${gc}Session${nc}: $session"
+	echo -e "${gc}Memory${nc}: $memory"
+}
+
+# Arguments...
+if [[ -n "$1" ]]; then
+	if [ "$1" == "--package-manager" ] || [ "$1" == "-pm" ]; then
+		for f in ${!osInf[@]}
+		do
+			if [[ -f $f ]];then
+				echo "$(${osInf[$f]})"
+			fi
+		done
+	elif [ "$1" == "--help" ] || [ "$1" == "-h" ]; then
+		echo "Available Arguments:"
+		echo "Package Manager [-pm]	Displays Package Manager"
+		echo "Help [-h][--help]	Displays Available Arguments"
+		echo "Version [--version]	Displays Current sfetch Version"
+		echo "Colors [--red]          Changes Output Colors"
+	elif [ "$1" == "--version" ] || [ "$1" == "-v" ]; then
+		echo "version $vn"
+	elif [ "$1" == "--red" ] || [ "$1" == "-r" ]; then
+		gc='\033[0;31m'
+		run
+	else
+		echo "Try using -h or --help for a list of Available Arguments."
+	fi
+fi
+
+# Information-check . . .
+if [[ $# -eq 0 ]] ; then
+	run
 fi
