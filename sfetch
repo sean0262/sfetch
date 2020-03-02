@@ -3,6 +3,7 @@ kernel=$(uname -r)
 shell=$(echo `$SHELL --version` | cut -d'(' -f1)
 vn=$(echo "0.1.1a")
 
+# Different package managers...
 declare -A osInf;
 osInf[/etc/redhat-release]=yum
 osInf[/etc/arch-release]=pacman
@@ -66,6 +67,11 @@ function run {
 	if [[ $distro =~ "Arch"  ]] || [[ $distro =~ "Manjaro" ]]
 	then
 		packages=$(pacman)
+	fi
+
+	if [[ $distro =~ "Gentoo" ]]
+	then
+		packages=$(emerge)
 	fi
 
 	# Find Greeter...
