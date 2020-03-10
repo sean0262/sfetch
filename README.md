@@ -1,5 +1,5 @@
 # sfetch
-light-weight system information script!
+sfetch is a lightweight fetch tool to display system information.
 
 ![sfetch](https://i.imgur.com/I92HyDx.png)![sfetch-slackware](https://i.imgur.com/a8igFqq.png)
 <br/> 
