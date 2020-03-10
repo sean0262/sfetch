@@ -6,7 +6,7 @@ light-weight system information script!
 [[Install Guide](https://github.com/sean0262/sfetch/wiki/Install)]  
   
 <br/>  
-<b><i>The current sfetch version is an early one, so a lot of DEs & Distros are still not supported!</b></i> 
+<b><i>The current sfetch version is an early one, not every distro is supported!</b></i> 
 <br/>  
 <br/>
 <b>Supported & Tested on:  </b>  <br/>
