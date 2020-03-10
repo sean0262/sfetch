@@ -1,5 +1,5 @@
 # sfetch
-light-weight system information script written in less than 100 lines of code. 
+light-weight system information script!
 
 ![sfetch](https://i.imgur.com/I92HyDx.png)![sfetch-slackware](https://i.imgur.com/a8igFqq.png)
 <br/> 
@@ -15,6 +15,7 @@ Debian/Ubuntu/Raspbian
 - Slackware   
 - Arch/Manjaro  
 - FreeBSD  
+- Gentoo  
 
 DEs:
 XFCE - Gnome
